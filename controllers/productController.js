@@ -1,18 +1,36 @@
-function getProducts(req, res) {
-    res.send("products from controller");
+const Product = require("../models/Product");
+
+async function getProducts(req, res) {
+    try {
+        const products = await Product.find();
+
+        res.status(200).json({
+            message: "Products fetched successfully",
+            count: products.length,
+            products
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
 }
-function addProducts(req, res) {
+
+async function addProducts(req, res) {
+    try{
+    console.log(req.body);
     const product = req.body;
 
     if (!product.name) {
         return res.status(400).send("Product name is required");
     }
 
-    if (!product.price<=0) {
+    if (product.price<=0) {
         return res.status(400).send("Product price must be greater than 0 ");
     }
 
-    if (!product.stock<0) {
+    if (product.stock<0) {
         return res.status(400).send("Product stock is required");
     }
 
@@ -27,9 +45,18 @@ function addProducts(req, res) {
     if (!product.volume) {
         return res.status(400).send("Product volume is required");
     }
-    addProducts.push(product);
+   const savedProduct = await Product.create(product);
 
-    res.status(201).send("product addded successfully");
+    res.status(201).json({
+        message:"product added successfully",
+        product: savedProduct
+});
+    }catch(error)
+    {
+        res.status(500).json({
+            message:error.message
+        })
+    }
 }
 module.exports = {
     getProducts,

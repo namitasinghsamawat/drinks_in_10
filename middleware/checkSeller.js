@@ -6,5 +6,5 @@ function checkSeller(req,res,next)
         return res.status(403).send("seller not verified");
     }
     next();
-    module.export=checkSeller;
 }
+ module.exports=checkSeller;
