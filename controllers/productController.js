@@ -95,9 +95,30 @@ async function updateProductById(req, res) {
         });
     }
 }
+async function deleteProductById(req,res)
+{
+    try{
+        const deleteProduct = await Product.findByIdAndDelete(req.params.id);
+        if(!deleteProduct)
+        {
+            return res.status(404).json({
+                message:"product not found"
+            });
+        }
+            return res.status(200).json({
+                message:"product deleted successfully"
+            });
+    }catch(error)
+    {
+        res.status(500).json({
+            message:error.message
+        });
+    }
+} 
 module.exports = {
     getProducts,
     addProducts,
     getProductById,
-    updateProductById
+    updateProductById,
+    deleteProductById
 };
