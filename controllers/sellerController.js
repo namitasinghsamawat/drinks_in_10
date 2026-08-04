@@ -75,7 +75,7 @@ async function loginSeller(req,res)
     if(!seller)
     {
         return res.status(401).json({
-            message: "invalid id or password";
+            message: "invalid id or password"
         })
     }
 
