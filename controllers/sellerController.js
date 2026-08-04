@@ -66,6 +66,25 @@ async function registerSeller(req, res) {
     }
 }
 
+async function loginSeller(req,res)
+{
+    const { email , password } = req.body;
+    console.log(req.body);
+    const seller = await Seller.findOne({email});
+
+    if(!seller)
+    {
+        return res.status(401).json({
+            message: "invalid id or password";
+        })
+    }
+
+    return res.status(200).json({
+        message: "login API reached"
+    })
+}
+
 module.exports = {
-    registerSeller
+    registerSeller,
+    loginSeller
 };
