@@ -75,8 +75,16 @@ async function loginSeller(req,res)
     if(!seller)
     {
         return res.status(401).json({
-            message: "invalid id or password"
+            message: "Invalid id or password"
         })
+    }
+    const isMatch = await bcrypt.compare(password,seller.password);
+    
+    if(!isMatch)
+    {
+        return res.status(401).json({
+            message: "Invalid email or password"
+        });
     }
 
     return res.status(200).json({
