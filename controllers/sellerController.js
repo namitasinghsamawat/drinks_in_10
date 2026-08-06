@@ -1,5 +1,6 @@
 const Seller = require("../models/Seller");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 async function registerSeller(req, res) {
     try {
@@ -86,9 +87,17 @@ async function loginSeller(req,res)
             message: "Invalid email or password"
         });
     }
+    console.log(process.env.JWT_SECRET);
+    const token = jwt.sign({
+        id: seller._id,
+        role: seller.role
+        },
+    process.env.JWT_SECRET
+    );
 
     return res.status(200).json({
-        message: "login API reached"
+        message: "login successfull",
+        token: token 
     })
 }
 
