@@ -22,6 +22,10 @@ const sellerSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        licenseVerified: {
+            type: Boolean,
+            default: false
+        },
 
         shopName: {
             type: String,
