@@ -1,0 +1,59 @@
+.navbar {
+    height: 72px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-bottom: 1px solid #eeeae3;
+}
+
+.logo {
+    font-family: "playfair Display",serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2b2722;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #55504a;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #b87924;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.cart-links {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color:  #2b2722;
+}
+
+.login-btn {
+    padding: 9px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #b87924;
+    color: white;
+    font-weight: 600;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.login-btn:hover {
+    background: #a6691f;
+    transform: translateY(-1px);
+}
