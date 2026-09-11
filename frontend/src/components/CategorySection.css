@@ -1,0 +1,65 @@
+.category-section {
+  padding: 80px 8%;
+  background: hsl(var(--background));
+}
+
+.category-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 36px;
+}
+
+.section-tag {
+  margin-bottom: 8px;
+  color: hsl(var(--primary));
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.category-header h2 {
+  font-family: "Playfair Display", serif;
+  color: hsl(var(--foreground));
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.category-description {
+  max-width: 360px;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.6;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.category-card {
+  min-height: 150px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 16px;
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+  transition: transform 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  border-color: hsl(var(--primary));
+  box-shadow: 0 10px 25px rgba(50, 35, 20, 0.08);
+}
+
+.category-card span {
+  font-size: 0.95rem;
+  font-weight: 600;
+}

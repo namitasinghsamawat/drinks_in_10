@@ -1,9 +1,20 @@
+import Hero from "../components/Hero";
+import CategorySection from "../components/CategorySection";
+import TrendingProducts from "../components/TrendingProducts";
+import WhyAmberBarrel from "../components/WhyAmberBarrel";
+import NearbySellers from "../components/NearbySellers";
+import Footer from "../components/Footer";
+
 function Home() {
   return (
-    <div>
-      <h1>Welcome to Amber Barrel</h1>
-      <p>Your favourite spirits, delivered to your doorstep.</p>
-    </div>
+    <>
+      <Hero />
+      <CategorySection />
+      <TrendingProducts />
+      <WhyAmberBarrel />
+      <NearbySellers />
+      <Footer />
+    </>
   );
 }
 
