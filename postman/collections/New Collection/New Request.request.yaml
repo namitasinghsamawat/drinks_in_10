@@ -1,0 +1,37 @@
+$kind: http-request
+name: New Request
+url: http://localhost:5000/seller/register
+method: POST
+headers:
+  - key: Authorization
+    value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNzg2ZWUyMDk2NDI4OWI3MWQ5NDdhNiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4NjI3Nzg5Mn0.MrjrzgXXKeMYPPCTzvOivLV2Pim11Hk-Dhpm0tyDsFM
+    disabled: true
+    description: ""
+  - key: Authorization
+    value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhN2YxYzdmZTNmYzE0YzMyNzRhMjE4ZSIsInJvbGUiOiJzZWxsZXIiLCJpYXQiOjE3ODY3MTYyMDN9.kSFiIu1gqq5HdUWqKyqAZ0a-cr331ZLIqN-Nr2MD6Fg
+    disabled: true
+    description: ""
+  - key: Authorization
+    value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhODI5OGY1ZDVjYTY5Yzg4NDlhOGY0ZCIsInJvbGUiOiJzZWxsZXIiLCJpYXQiOjE3ODY5NDQzNDN9.IB0gsk0ClDUXYEnRz9PiiOAaY8azp-cW4Sl-vXo5e5I
+    disabled: true
+    description: ""
+body:
+  type: json
+  content: "{\r
+
+    \  \"name\": \"Rahul Sharma\",\r
+
+    \  \"email\": \"rahul9@gmail.com\",\r
+
+    \  \"password\": \"Rahul123\",\r
+
+    \  \"phone\": \"9876543210\",\r
+
+    \  \"licenseNumber\": \"RJ!@LIC-123456\",\r
+
+    \  \"shopName\": \"Royal Wine Shop\",\r
+
+    \  \"address\": \"Jaipur, Rajasthan\"\r
+
+    }"
+order: 1786076883841

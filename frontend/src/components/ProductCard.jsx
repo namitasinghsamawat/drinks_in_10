@@ -1,4 +1,4 @@
-import { ShoppingCart, Star } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 
 import {
   Card,
@@ -10,36 +10,58 @@ import { Button } from "@/components/ui/button";
 
 function ProductCard({ product }) {
   return (
-    <Card>
-      <div className="flex h-60 items-center justify-center bg-secondary">
-        Product Image
+    <Card className="flex h-full flex-col overflow-hidden">
+
+      {/* Product Image */}
+      <div className="flex h-60 shrink-0 items-center justify-center bg-secondary">
+        <span className="text-sm text-muted-foreground">
+          Product Image
+        </span>
       </div>
 
-      <CardContent className="p-6">
+      <CardContent className="flex flex-col flex-grow p-6">
+
+        {/* Category */}
         <p className="text-sm text-muted-foreground">
           {product.category}
         </p>
 
-        <h3 className="mt-1 text-lg font-semibold">
+        {/* Product Name */}
+        <h3 className="mt-1 text-lg font-semibold line-clamp-2">
           {product.name}
         </h3>
 
-        <div className="mt-2 flex items-center gap-1 text-primary">
-          <Star size={15} fill="currentColor" />
-          <span className="text-sm">{product.rating}</span>
+        {/* Brand + Volume */}
+        <p className="mt-2 text-sm text-muted-foreground">
+          {product.brand} • {product.volume}
+        </p>
+
+        <div className="mt-auto pt-4">
+          {/* Price */}
+          <p className="text-lg font-bold">
+            ₹{product.price}
+          </p>
+
+          {/* Stock */}
+          <p className="mt-1 text-xs text-muted-foreground">
+            {product.stock > 0
+              ? `${product.stock} available`
+              : "Out of stock"}
+          </p>
         </div>
 
-        <p className="mt-3 text-lg font-bold">
-          ₹{product.price}
-        </p>
       </CardContent>
 
-      <CardFooter className="p-6 pt-0">
-        <Button className="w-full">
+      <CardFooter className="mt-auto p-6 pt-0">
+        <Button
+          className="w-full"
+          disabled={product.stock === 0}
+        >
           <ShoppingCart />
-          Add to Cart
+          {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
         </Button>
       </CardFooter>
+
     </Card>
   );
 }
