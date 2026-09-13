@@ -33,25 +33,22 @@ function Products() {
   return (
     <main className="min-h-screen bg-background px-[6%] py-12">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10">
-          <p className="mb-2 text-xs font-bold tracking-[2px] text-primary">
-            AMBER BARREL SHOP
-          </p>
-
-          <h1 className="font-heading text-4xl font-semibold text-foreground md:text-5xl">
-            Find your perfect pour.
-          </h1>
-
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
-            Explore spirits from verified sellers near you.
-          </p>
-        </div>
         <ProductFilters
           search={search}
           setSearch={setSearch}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
+
+        <div className="mb-12 flex flex-col items-center text-center">
+          <h1 className="font-heading text-3xl font-medium tracking-tight text-foreground md:text-4xl">
+            Find your perfect pour.
+          </h1>
+
+          <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground/80">
+            Explore spirits from verified sellers near you.
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {filteredProducts.map((product) => (

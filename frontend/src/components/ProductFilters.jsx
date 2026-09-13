@@ -19,7 +19,7 @@ function ProductFilters({
 
                 <Input
                     placeholder="Search products..."
-                    className="h-11 pl-10"
+                    className="h-11 pl-10 rounded-full bg-muted/20 border-border/40 focus-visible:ring-1 shadow-sm transition-all hover:bg-muted/30"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
@@ -27,42 +27,20 @@ function ProductFilters({
             </div>
 
             <div className="flex flex-wrap gap-2">
-                <Button
-                    variant={selectedCategory === "All" ? "secondary" : "outline"}
-                    onClick={() => setSelectedCategory("All")}
-                >
-                    All
-                </Button>
-                <Button
-                    variant={selectedCategory === "Whisky" ? "secondary" : "outline"}
-                    onClick={() => setSelectedCategory("Whisky")}
-                >
-                    Whisky
-                </Button>
-                <Button
-                    variant={selectedCategory === "Vodka" ? "secondary" : "outline"}
-                    onClick={() => setSelectedCategory("Vodka")}
-                >
-                    Vodka
-                </Button>
-                <Button
-                    variant={selectedCategory === "Gin" ? "secondary" : "outline"}
-                    onClick={() => setSelectedCategory("Gin")}
-                >
-                    Gin
-                </Button>
-                <Button
-                    variant={selectedCategory === "Rum" ? "secondary" : "outline"}
-                    onClick={() => setSelectedCategory("Rum")}
-                >
-                    Rum
-                </Button>
-                <Button
-                    variant={selectedCategory === "Wine" ? "secondary" : "outline"}
-                    onClick={() => setSelectedCategory("Wine")}
-                >
-                    Wine
-                </Button>
+                {["All", "Whisky", "Vodka", "Gin", "Rum", "Wine"].map((cat) => (
+                    <Button
+                        key={cat}
+                        variant={selectedCategory === cat ? "secondary" : "ghost"}
+                        className={`rounded-full px-5 text-sm font-medium transition-all ${
+                            selectedCategory === cat 
+                                ? "shadow-sm bg-secondary text-secondary-foreground" 
+                                : "text-muted-foreground hover:bg-muted/40 hover:text-foreground"
+                        }`}
+                        onClick={() => setSelectedCategory(cat)}
+                    >
+                        {cat}
+                    </Button>
+                ))}
             </div>
         </div>
     );
