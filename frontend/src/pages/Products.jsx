@@ -11,28 +11,22 @@ function Products() {
     fetch("http://localhost:5000/products")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setProducts(data.products);
+        setProducts(data.products || data); // handle different api responses safely
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
       });
   }, []);
 
-  const filteredProducts = products.filter((product) => {
-    const matchesSearch = product.name
-      .toLowerCase()
-      .includes(search.toLowerCase());
-
-    const matchesCategory =
-      selectedCategory === "All" ||
-      product.category === selectedCategory;
-
+  const filteredProducts = Array.isArray(products) ? products.filter((product) => {
+    const matchesSearch = product.name?.toLowerCase().includes(search.toLowerCase());
+    const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
-  });
+  }) : [];
+
   return (
-    <main className="min-h-screen bg-background px-[6%] py-12">
-      <div className="mx-auto max-w-7xl">
+    <main className="min-h-screen bg-muted/20">
+      <div className="mx-auto max-w-7xl px-4 py-6">
         <ProductFilters
           search={search}
           setSearch={setSearch}
@@ -40,23 +34,21 @@ function Products() {
           setSelectedCategory={setSelectedCategory}
         />
 
-        <div className="mb-12 flex flex-col items-center text-center">
-          <h1 className="font-heading text-3xl font-medium tracking-tight text-foreground md:text-4xl">
-            Find your perfect pour.
-          </h1>
-
-          <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground/80">
-            Explore spirits from verified sellers near you.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {filteredProducts.map((product) => (
-            <ProductCard
-              key={product._id}
-              product={product}
-            />
-          ))}
+        <div className="mt-4">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                key={product._id || product.id}
+                product={product}
+              />
+            ))}
+          </div>
+          
+          {filteredProducts.length === 0 && (
+             <div className="py-20 text-center text-muted-foreground">
+               No products found.
+             </div>
+          )}
         </div>
       </div>
     </main>

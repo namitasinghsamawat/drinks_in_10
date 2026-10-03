@@ -1,77 +1,84 @@
-import { ShoppingCart } from "lucide-react";
-
-import {
-  Card,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-
+import { useContext } from "react";
+import CartContext from "../context/CartContext";
+import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 function ProductCard({ product }) {
-  return (
-    <Card className="flex h-full flex-col overflow-hidden border-transparent bg-transparent shadow-none hover:bg-card/40 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-500 rounded-[2rem] group p-2">
+  const { addToCart, cart, updateQuantity } = useContext(CartContext);
+  
+  // Check if product is already in cart to show quantity controls
+  const cartItem = cart.find(item => item.id === product.id);
 
-      {/* Product Image */}
-      <div className="flex h-60 items-center justify-center bg-muted/20 p-6 rounded-[1.5rem] transition-colors duration-500 group-hover:bg-muted/30">
+  return (
+    <div className="flex flex-col bg-white border border-border/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 relative group">
+      
+      {/* Delivery tag */}
+      <div className="absolute top-3 left-3 bg-white/90 text-[10px] font-bold tracking-wider px-2 py-1 rounded-md text-foreground shadow-sm backdrop-blur-md z-10 border border-border/50">
+        10 MINS
+      </div>
+
+      {/* Image */}
+      <div className="h-44 bg-muted/10 flex items-center justify-center p-6 transition-transform duration-500 group-hover:scale-[1.02]">
         {product.image ? (
           <img
             src={product.image}
             alt={product.name}
-            className="h-full w-full object-contain"
+            className="h-full w-full object-contain drop-shadow-sm"
           />
         ) : (
-          <span className="text-sm text-muted-foreground">
-            Product Image
-          </span>
+          <div className="w-full h-full flex items-center justify-center rounded-md">
+            <span className="text-xs font-medium text-muted-foreground/60 uppercase tracking-widest">No Image</span>
+          </div>
         )}
       </div>
 
-      <CardContent className="flex flex-col flex-grow p-4 px-2">
-
-        {/* Category */}
-        <p className="text-[13px] font-medium tracking-wide uppercase text-muted-foreground/70">
-          {product.category}
-        </p>
-
-        {/* Product Name */}
-        <h3 className="mt-1.5 text-[1.1rem] font-medium leading-tight tracking-tight text-foreground">
+      {/* Content */}
+      <div className="p-4 flex flex-col flex-grow bg-white">
+        <h3 className="text-[0.95rem] font-semibold leading-tight text-foreground line-clamp-2 min-h-[2.5rem]">
           {product.name}
         </h3>
-
-        {/* Brand + Volume */}
-        <p className="mt-1.5 text-sm text-muted-foreground/80">
-          {product.brand} • {product.volume}
+        
+        <p className="text-[0.8rem] text-muted-foreground mt-1.5 font-medium">
+          {product.volume || product.brand}
         </p>
 
-        <div className="mt-auto pt-4">
-          {/* Price */}
-          <p className="text-base font-semibold text-foreground">
-            ₹{product.price}
-          </p>
+        <div className="mt-auto pt-4 flex items-center justify-between">
+          <div>
+            <p className="text-[1.05rem] font-bold text-foreground">
+              ₹{product.price}
+            </p>
+          </div>
 
-          {/* Stock */}
-          <p className="mt-1 text-xs text-muted-foreground">
-            {product.stock > 0
-              ? `${product.stock} available`
-              : "Out of stock"}
-          </p>
+          {cartItem ? (
+            <div className="flex items-center bg-primary text-primary-foreground rounded-lg h-9 w-[100px] justify-between px-2 shadow-sm">
+              <button 
+                onClick={() => updateQuantity(product.id, -1)}
+                className="w-7 h-7 flex items-center justify-center text-lg font-bold hover:bg-black/10 rounded-md transition-colors"
+              >
+                -
+              </button>
+              <span className="text-sm font-bold">{cartItem.quantity}</span>
+              <button 
+                onClick={() => updateQuantity(product.id, 1)}
+                className="w-7 h-7 flex items-center justify-center text-lg font-bold hover:bg-black/10 rounded-md transition-colors"
+              >
+                +
+              </button>
+            </div>
+          ) : (
+            <Button
+              variant="default"
+              size="sm"
+              className="h-9 px-4 font-bold rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground shadow-none transition-all duration-300 border border-primary/20"
+              disabled={product.stock === 0}
+              onClick={() => addToCart(product)}
+            >
+              {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
+            </Button>
+          )}
         </div>
-
-      </CardContent>
-
-      <CardFooter className="mt-auto p-4 px-2 pt-0">
-        <Button
-          variant="outline"
-          className="w-full rounded-full border-border/40 text-sm font-medium shadow-none transition-all group-hover:border-primary/20 group-hover:bg-primary/5 group-hover:text-primary"
-          disabled={product.stock === 0}
-        >
-          <ShoppingCart className="w-4 h-4 mr-2 opacity-70" />
-          {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
-        </Button>
-      </CardFooter>
-
-    </Card>
+      </div>
+    </div>
   );
 }
 

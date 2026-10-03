@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
   
   const [formData, setFormData] = useState({
     email: "",
@@ -34,7 +36,7 @@ function Login() {
       console.log(data);
 
       if (response.ok) {
-        localStorage.setItem("token", data.token);
+        login(data.token);
         navigate("/products");
       }
     } catch (error) {

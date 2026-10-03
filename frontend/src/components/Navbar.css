@@ -1,29 +1,43 @@
 .navbar {
-    height: 72px;
+    height: 80px;
     padding: 0 6%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #ffffff;
-    border-bottom: 1px solid #eeeae3;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(238, 234, 227, 0.8);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.logo {
-    font-family: "playfair Display",serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #2b2722;
+.logo a {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #2b2722 0%, #b87924 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .nav-links {
     display: flex;
-    gap: 32px;
+    gap: 40px;
 }
 
 .nav-links a {
-    font-size: 0.95rem;
-    font-weight: 600;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
     color: #55504a;
+    text-decoration: none;
+    padding: 8px 0;
     transition: color 0.2s ease;
 }
 
@@ -34,26 +48,40 @@
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 24px;
 }
 
-.cart-links {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color:  #2b2722;
+.cart-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2b2722;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease;
+}
+
+.cart-link:hover {
+    color: #b87924;
 }
 
 .login-btn {
-    padding: 9px 18px;
+    font-family: 'Inter', sans-serif;
+    padding: 10px 28px;
     border: none;
-    border-radius: 8px;
-    background: #b87924;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #b87924 0%, #9a5f15 100%);
     color: white;
+    font-size: 1rem;
     font-weight: 600;
-    transition: transform 0.2s ease, background 0.2s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(184, 121, 36, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .login-btn:hover {
-    background: #a6691f;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(184, 121, 36, 0.3);
 }

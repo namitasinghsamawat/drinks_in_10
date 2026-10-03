@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 function Register() {
+  const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,7 +39,7 @@ function Register() {
         if (response.ok) {
             // Assuming the backend returns a token on successful registration, like login does
             if (data.token) {
-                localStorage.setItem("token", data.token);
+                login(data.token);
             }
             navigate("/products");
         }
